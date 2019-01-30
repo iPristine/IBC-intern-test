@@ -1,0 +1,42 @@
+html {
+  margin: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: aliceblue;
+}
+header {
+  display: block;
+  background-color: aquamarine;
+  padding: 0;
+  border: 0;
+  text-align: center;
+}
+.content {
+  margin: 0;
+  padding: 0;
+  border: 1px solid red; /*TODO delet*/
+  text-align: center;
+}
+
+.wrapper {
+  border: 1px solid green;
+}
+
+table {
+  border: 1px solid grey;
+  width: 100%;
+}
+tbody {
+  min-height: 200px;
+}
+
+footer {
+  text-align: right;
+  margin-right: 20%;
+  color: yellowgreen;
+}
+.copyrite::first-letter {
+  color: red;
+}

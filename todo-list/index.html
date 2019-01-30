@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Сперва было желание стили нормальные сделать,
+        но дедлайн поджимает, поэтому оставлю так как есть сеййчас. 
+        У меня на git есть тестовые с показательно хорошей версткой по БЭМу
+        Например вот:
+        https://github.com/iPristine/JetStyle
+        -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TODO list</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="index.css">
+
+    <script>
+        function delTask(id){
+            document.getElementById(id).remove();
+        }
+
+        function addTask(){
+            let lastId = ((lastChild)=>{return lastChild?lastChild.id:"0"})(document.getElementById('task-list').lastElementChild);
+
+            let task = document.createElement("tr");
+            task.className="task";
+            task.id = `${lastId+1}`;
+
+
+            let currentDate = document.createElement("td");
+            let d = new Date();
+            let options = {
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            currentDate.innerHTML=d.toLocaleString("ru", options);
+            currentDate.className="current-day";
+            task.appendChild(currentDate);
+
+            let message = document.createElement("td");
+            message.innerHTML=document.getElementById("input-message").value;
+            task.appendChild(message);
+
+            let priority = document.createElement("td");
+            let selectedPriority=document.getElementById("input-priority").options.selectedIndex;
+            priority.innerHTML=document.getElementById("input-priority").options[selectedPriority].value;
+            task.appendChild(priority);
+
+            let deadLine = document.createElement("td");
+            deadLine.innerHTML=document.getElementById("input-deadline").value;
+            task.appendChild(deadLine);
+
+            let deleteBtn = document.createElement("td");
+            let btn= document.createElement("button");
+            btn.innerHTML = "X";
+            btn.onclick = (() =>delTask(task.id));
+            deleteBtn.appendChild(btn);
+            task.appendChild(deleteBtn);
+
+            document.getElementById('task-list').appendChild(task);
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+            <h1>my TODO list for IBC</h1>
+    </header>
+    <div class="content">
+        <div class="wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Deadline</th>
+                        <th>DEL</th>
+                    </tr>
+                </thead>
+                <tbody id="task-list">
+                    
+                </tbody>
+
+            </table>
+
+        </div>
+        <div class="input-task"> 
+            <p>Task</p>
+            <input id="input-message" type="textarea" class="task-message">
+            <p>Priority</p>
+            <select id="input-priority"> 
+                <option>low</option>
+                <option>medium</option>
+                <option>high</option>
+            </select>
+            <p>Deadline</p>
+            <input id="input-deadline"  type="date"><br>
+            <button class="add-line" onclick="addTask()">ADD</button>
+        </div>            
+    </div>
+    <footer>
+        <p class="copyrite">iPristine</p>
+    </footer>
+</body>
+</html>
